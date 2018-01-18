@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2018-01-18T03:18:00 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportTest" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30" uuid="43c90ca5-f3c3-4dda-8423-9ff1442f90e3">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="net.sf.jasperreports.style.evaluation.time.enabled" value="true"/>
+	<style name="style_sumValue">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($V{sumValue}.compareTo(new BigDecimal(10)) > 0)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#C4D79B" pattern="#0.0" isBlankWhenNull="true" fontName="Calibri" fontSize="9">
+				<box rightPadding="1"/>
+			</style>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($V{sumValue}.compareTo(new BigDecimal(10)) < 0)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#DA9694" pattern="#0.0" isBlankWhenNull="true" fontName="Calibri" fontSize="9">
+				<box rightPadding="1"/>
+			</style>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[select * from product]]>
+	</queryString>
+	<field name="ID" class="java.lang.Integer"/>
+	<field name="NAME" class="java.lang.String"/>
+	<field name="COST" class="java.math.BigDecimal"/>
+	<variable name="sumValue" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{COST}]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="76">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="50" width="100" height="20" forecolor="#000000" backcolor="#CCCCCC" uuid="dfe13f55-12a6-4c33-b5ba-00dd61f37c96"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Name"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="###0.00;-###0.00">
+				<reportElement style="style_sumValue" mode="Opaque" x="100" y="20" width="100" height="30" uuid="ed251db0-474e-4e20-8788-3c2f08bfd1e7"/>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sumValue}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="20" width="100" height="30" forecolor="#000000" backcolor="#CCCCCC" uuid="62b62711-8cfb-4df2-8f9e-4a34249dcc66"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total Cost]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="100" y="50" width="100" height="20" forecolor="#000000" backcolor="#CCCCCC" uuid="d731fbed-2bae-4da6-bc3f-3997455fbe2c"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Cost"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Immediate">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="6a009a8c-16de-451c-a0f1-516a48f793d0"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NAME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="100" y="0" width="100" height="20" uuid="1fccff95-408c-4364-b003-c691fefdde62"/>
+				<box rightPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COST}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
