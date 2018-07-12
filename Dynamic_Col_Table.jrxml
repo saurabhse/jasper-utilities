@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2018-07-12T03:50:53 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Dynamic_Col_Table" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="772" leftMargin="10" rightMargin="10" topMargin="20" bottomMargin="20" uuid="a8512fa9-564f-4bbf-89ed-7d604db0a1f4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<style name="Crosstab_CD" mode="Opaque" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{VALMeasure}.multiply(new BigDecimal(100)).compareTo( new java.math.BigDecimal(4) ) >= 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#C4D79B"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{VALMeasure}.multiply(new BigDecimal(100)).compareTo( new java.math.BigDecimal(-4) )<0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#DA9694"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{VALMeasure}.multiply(new BigDecimal(100)).compareTo( new java.math.BigDecimal(-4) )>0 && $V{VALMeasure}.multiply(new BigDecimal(100)).compareTo( new java.math.BigDecimal(4) ) < 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FFFFFF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="CrossTab_DS" uuid="252cc1e3-2e3c-43b0-b72a-54205fc1ecdc">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+		<parameter name="param" class="java.lang.String">
+			<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select 'Col 1' as COLS,	3100 as SEQ,	'abc' as CODE,-0.026 as VAL,	2 as COLSCNT,	2 as CODECNT from orders
+union all
+select 	'Col 2' as COLS,	3200 as SEQ,	'xyz' as CODE,	0.056 as VAL,	2 as COLSCNT,	2 as CODECNT from orders;]]>
+		</queryString>
+		<field name="COLS" class="java.lang.String"/>
+		<field name="SEQ" class="java.lang.Integer"/>
+		<field name="CODE" class="java.lang.String"/>
+		<field name="VAL" class="java.math.BigDecimal"/>
+		<field name="COLSCNT" class="java.lang.Integer"/>
+		<field name="CODECNT" class="java.lang.Integer"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[select 1 from orders]]>
+	</queryString>
+	<field name="C1" class="java.lang.Integer"/>
+	<group name="Sector">
+		<groupHeader>
+			<band height="52">
+				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<crosstab>
+					<reportElement positionType="Float" mode="Opaque" x="495" y="12" width="232" height="23" uuid="9ec83888-ca41-4ea6-b12a-a5afe3a3e4a1">
+						<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="Crosstab"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<crosstabDataset>
+						<dataset>
+							<datasetRun subDataset="CrossTab_DS" uuid="b7f36964-e241-4093-8c6d-e2ad99140c21">
+								<datasetParameter name="param">
+									<datasetParameterExpression><![CDATA[""]]></datasetParameterExpression>
+								</datasetParameter>
+							</datasetRun>
+						</dataset>
+					</crosstabDataset>
+					<rowGroup name="VAL" width="0">
+						<bucket class="java.lang.String">
+							<bucketExpression><![CDATA[$F{CODE}]]></bucketExpression>
+						</bucket>
+						<crosstabRowHeader>
+							<cellContents>
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							</cellContents>
+						</crosstabRowHeader>
+						<crosstabTotalRowHeader>
+							<cellContents/>
+						</crosstabTotalRowHeader>
+					</rowGroup>
+					<rowGroup name="COLSCNT" width="0">
+						<bucket class="java.math.BigDecimal">
+							<bucketExpression><![CDATA[$F{COLSCNT}]]></bucketExpression>
+						</bucket>
+						<crosstabRowHeader>
+							<cellContents mode="Opaque">
+								<property name="local_mesure_unitwidth" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<box>
+									<topPen lineColor="#FFFFFF"/>
+									<leftPen lineColor="#FFFFFF"/>
+									<bottomPen lineColor="#FFFFFF"/>
+									<rightPen lineColor="#FFFFFF"/>
+								</box>
+								<textField>
+									<reportElement x="0" y="0" width="0" height="11" uuid="06cebeed-baa0-438a-92dc-ce9e46576f45">
+										<property name="local_mesure_unitwidth" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+							</cellContents>
+						</crosstabRowHeader>
+						<crosstabTotalRowHeader>
+							<cellContents>
+								<staticText>
+									<reportElement x="0" y="0" width="50" height="50" uuid="dc8eaa40-2497-41aa-a9cc-4df064376029"/>
+									<text><![CDATA[COLS Count]]></text>
+								</staticText>
+							</cellContents>
+						</crosstabTotalRowHeader>
+					</rowGroup>
+					<rowGroup name="CODECNT" width="0">
+						<bucket class="java.math.BigDecimal">
+							<bucketExpression><![CDATA[$F{CODECNT}]]></bucketExpression>
+						</bucket>
+						<crosstabRowHeader>
+							<cellContents mode="Opaque">
+								<property name="local_mesure_unitwidth" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<box>
+									<topPen lineColor="#FFFFFF"/>
+									<leftPen lineColor="#FFFFFF"/>
+									<bottomPen lineColor="#FFFFFF"/>
+									<rightPen lineColor="#FFFFFF"/>
+								</box>
+								<textField>
+									<reportElement x="0" y="0" width="0" height="11" uuid="3745a034-7d76-4349-87b8-acbdb573a20a">
+										<property name="local_mesure_unitwidth" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+							</cellContents>
+						</crosstabRowHeader>
+						<crosstabTotalRowHeader>
+							<cellContents>
+								<staticText>
+									<reportElement x="0" y="0" width="50" height="50" uuid="43d5d3e8-fc38-427b-b0d9-e847786339d0"/>
+									<text><![CDATA[Reg Count]]></text>
+								</staticText>
+							</cellContents>
+						</crosstabTotalRowHeader>
+					</rowGroup>
+					<columnGroup name="COLS" height="12">
+						<bucket class="java.lang.String">
+							<bucketExpression><![CDATA[$F{COLS}]]></bucketExpression>
+							<orderByExpression><![CDATA[$V{SEQ_VAR}]]></orderByExpression>
+						</bucket>
+						<crosstabColumnHeader>
+							<cellContents backcolor="#F0F8FF" mode="Opaque">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<property name="local_mesure_unitheight" value="pixel"/>
+								<property name="local_mesure_unitwidth" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField>
+									<reportElement style="Table_Column_Header" x="0" y="0" width="22" height="12" uuid="379ca649-6828-47f1-89b6-4fdb352f0338">
+										<property name="com.jaspersoft.studio.unit.height" value="px"/>
+										<property name="local_mesure_unitheight" value="pixel"/>
+										<property name="local_mesure_unitwidth" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$V{COLS}]]></textFieldExpression>
+								</textField>
+							</cellContents>
+						</crosstabColumnHeader>
+						<crosstabTotalColumnHeader>
+							<cellContents/>
+						</crosstabTotalColumnHeader>
+					</columnGroup>
+					<measure name="VALMeasure" class="java.lang.Double" calculation="Lowest">
+						<measureExpression><![CDATA[$F{VAL}]]></measureExpression>
+					</measure>
+					<measure name="SEQ_VAR" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{SEQ}]]></measureExpression>
+					</measure>
+          <crosstabCell width="22" height="11">
+						<cellContents style="Crosstab_CD">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<property name="local_mesure_unitheight" value="pixel"/>
+							<textField pattern="#0.0" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="22" height="11" uuid="097256ca-4512-4f04-bc95-51ca803e0e04">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									<property name="local_mesure_unitwidth" value="pixel"/>
+									<property name="local_mesure_unitheight" value="pixel"/>
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<printWhenExpression><![CDATA[$V{ROW_COUNT} == $V{CODECNT}]]></printWhenExpression>
+								</reportElement>
+								<box rightPadding="1">
+									<bottomPen lineWidth="1.0"/>
+								</box>
+								<textElement textAlignment="Right">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{VALMeasure}!=null?$V{VALMeasure}.multiply(new BigDecimal(100)):""]]></textFieldExpression>
+							</textField>
+							<textField pattern="#0.0" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="22" height="11" uuid="f9c7161f-cc40-44e8-aa73-252ba846c131">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									<property name="local_mesure_unitheight" value="pixel"/>
+									<property name="local_mesure_unitwidth" value="pixel"/>
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<printWhenExpression><![CDATA[$V{ROW_COUNT} == 8 && $V{COLUMN_COUNT} == $V{COLSCNT}]]></printWhenExpression>
+								</reportElement>
+								<box rightPadding="1">
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement textAlignment="Right">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{VALMeasure}!=null?$V{VALMeasure}.multiply(new BigDecimal(100)):""]]></textFieldExpression>
+							</textField>
+							<textField pattern="#0.0" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="22" height="11" uuid="bc903acf-e8ef-4ecf-b322-e756b613c582">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									<property name="local_mesure_unitwidth" value="pixel"/>
+									<property name="local_mesure_unitheight" value="pixel"/>
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<printWhenExpression><![CDATA[$V{ROW_COUNT} !=  $V{CODECNT}]]></printWhenExpression>
+								</reportElement>
+								<box rightPadding="1"/>
+								<textElement textAlignment="Right">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{VALMeasure}!=null?$V{VALMeasure}.multiply(new BigDecimal(100)):""]]></textFieldExpression>
+							</textField>
+							<textField pattern="#0.0" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="22" height="11" uuid="f9c7161f-cc40-44e8-aa73-252ba846c131">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									<property name="local_mesure_unitheight" value="pixel"/>
+									<property name="local_mesure_unitwidth" value="pixel"/>
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<printWhenExpression><![CDATA[$V{ROW_COUNT} !=  $V{CODECNT} && $V{COLUMN_COUNT} == $V{COLSCNT}]]></printWhenExpression>
+								</reportElement>
+								<box rightPadding="1">
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement textAlignment="Right">
+									<font fontName="Calibri" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{VALMeasure}!=null?$V{VALMeasure}.multiply(new BigDecimal(100)):""]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabCell>
+					<crosstabCell width="0" height="20" rowTotalGroup="CODECNT">
+						<cellContents/>
+					</crosstabCell>
+					<crosstabCell width="0" height="22" rowTotalGroup="CODECNT" columnTotalGroup="COLS">
+						<cellContents/>
+					</crosstabCell>
+				</crosstab>
+			</band>
+		</groupHeader>
+	</group>
+	
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+</jasperReport>
