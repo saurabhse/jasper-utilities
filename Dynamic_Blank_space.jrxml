@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Dynamic_Blank_space" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ced9a262-faa8-4d02-aa84-0e945af89898">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<variable name="subrep_Count" class="java.lang.Integer"/>
+	<group name="Group1">
+		<groupHeader>
+			<band height="33">
+				<subreport>
+					<reportElement x="20" y="0" width="200" height="32" uuid="d3a66b31-b8c6-48b2-9fa6-6c087f4e6670"/>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<returnValue subreportVariable="TABLE_COUNT" toVariable="subrep_Count"/>
+					<subreportExpression><![CDATA["Return_From_Subreport.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[$V{subrep_Count} != 10]]></groupExpression>
+		<groupHeader>
+			<band height="33">
+				<subreport>
+					<reportElement x="20" y="0" width="200" height="32" uuid="d3a66b31-b8c6-48b2-9fa6-6c087f4e6670">
+						<printWhenExpression><![CDATA[$V{subrep_Count} != 10]]></printWhenExpression>
+					</reportElement>
+					<subreportParameter name="Row_count">
+						<subreportParameterExpression><![CDATA[$V{subrep_Count}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA["Blank_Table.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+</jasperReport>
