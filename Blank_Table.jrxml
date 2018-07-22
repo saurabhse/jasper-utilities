@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_Table" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a5c6e56d-99c2-44a8-98f5-fc9ecec22886">
-	<parameter name="Row_count" class="java.lang.String"/>
+	<parameter name="Row_count" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[select level from order connect by level < = 10-$P{Row_count}]]>
 	</queryString>
@@ -13,7 +13,7 @@
 		<band height="12" splitType="Stretch">
 			<textField>
 				<reportElement x="3" y="1" width="100" height="11" uuid="98a6b9fd-4c04-4ef0-8096-a2dcb8a87d2a"/>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
